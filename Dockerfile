@@ -1,4 +1,4 @@
-FROM php:5.6-fpm-alpine
+FROM php:7.2.30-fpm
 
 WORKDIR /data/www
 
@@ -30,7 +30,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && pecl install memcached \
     && pecl install redis \
     && pecl install xdebug \
-    && pecl install https://pecl.php.net/get/xhprof-0.9.4.tgz \
+    && pecl install xhprof \
     && docker-php-ext-enable xhprof \
     && cd /usr/local/etc/php && cp php.ini-production php.ini \
     && cd / \

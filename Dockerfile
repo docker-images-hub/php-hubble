@@ -1,4 +1,4 @@
-FROM php:7.2.30-fpm
+FROM php:7.2.30-fpm-alpine
 
 WORKDIR /data/www
 
@@ -26,12 +26,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install zip \
-    && docker-php-ext-install mysql mysqli pdo_mysql pgsql pdo_pgsql exif pcntl sockets \
-    && pecl install memcached \
-    && pecl install redis \
-    && pecl install xdebug \
-    && pecl install xhprof \
-    && docker-php-ext-enable xhprof \
+    && docker-php-ext-install mysqli pdo_mysql pgsql pdo_pgsql exif pcntl sockets \
+    && pecl install memcached && docker-php-ext-enable memcached \
+    && pecl install redis && docker-php-ext-enable redis \
+    && pecl install xdebug && docker-php-ext-enable xdebug \
+    && pecl install xhprof && docker-php-ext-enable xhprof \
     && cd /usr/local/etc/php && cp php.ini-production php.ini \
     && cd / \
     && runDeps="$( \
@@ -41,7 +40,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
             | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
     )" \
     && apk add --no-cache $runDeps \
-    && apk del --no-network .build-deps
+    && apk del  .build-deps
 
 RUN apk add fontconfig mkfontscale wqy-zenhei --update-cache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted
 

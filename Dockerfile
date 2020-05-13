@@ -2,8 +2,8 @@ FROM php:5.6-fpm-alpine
 
 WORKDIR /data/www
 
-COPY soft/dockerized-phantomjs.tar.gz /tmp/
-COPY soft/phantomjs-2.1.1-linux-x86_64.tar.bz2 /usr/local/
+COPY files/dockerized-phantomjs.tar.gz /tmp/
+COPY files/phantomjs-2.1.1-linux-x86_64.tar.bz2 /usr/local/
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk --update upgrade \

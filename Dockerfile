@@ -27,9 +27,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install zip \
     && docker-php-ext-install mysql mysqli pdo_mysql pgsql pdo_pgsql exif pcntl sockets \
-    && pecl install memcached \
-    && pecl install redis \
-    && pecl install xdebug \
+    && pecl install https://pecl.php.net/get/memcached-2.2.0.tgz \
+    && pecl install https://pecl.php.net/get/redis-2.2.8.tgz \
+    && pecl install https://pecl.php.net/get/xdebug-2.5.5.tgz \
     && pecl install https://pecl.php.net/get/xhprof-0.9.4.tgz \
     && docker-php-ext-enable xhprof \
     && cd /usr/local/etc/php && cp php.ini-production php.ini \

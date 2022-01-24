@@ -55,9 +55,5 @@ RUN cd /tmp && mkdir dockerized-phantomjs && tar zxf dockerized-phantomjs.tar.gz
     ln -s /usr/local/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin && \
     rm -rf /usr/local/phantomjs-2.1.1-linux-x86_64.tar.bz2 && rm -rf /tmp/*
 
-#RUN apk add --no-cache --repository http://mirrors.aliyun.com/alpine/edge/community gnu-libiconv
-#ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
-#RUN apk --no-cache --allow-untrusted --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add gnu-libiconv
-#RUN apk --no-cache --allow-untrusted --repository http://dl-cdn.alpinelinux.org/alpine/v3.10/community/ add gnu-libiconv
-RUN apk add --no-cache --allow-untrusted --repository http://dl-cdn.alpinelinux.org/alpine/v3.10/community/ gnu-libiconv=1.15-r2
+RUN apk add --no-cache --allow-untrusted --repository http://mirrors.aliyun.com/alpine/v3.11/community// gnu-libiconv=1.15-r2
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
